@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 @Injectable()
 export class MemberService {
 	constructor(@InjectModel('Member') private memberModel: Model<null>) {}
-	public async signUp(): Promise<string> {
+	public async signup(): Promise<string> {
 		return 'User signed up';
 	}
 	public async login(): Promise<string> {
