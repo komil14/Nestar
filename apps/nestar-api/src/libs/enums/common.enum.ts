@@ -1,66 +1,29 @@
- export enum Message {
-  /* =========================
-     GENERAL
-  ========================== */
-  SOMETHING_WENT_WRONG = 'Something went wrong!',
-  NO_DATA_FOUND = 'No data found!',
-  BAD_REQUEST = 'Bad request!',
-  NOT_ALLOWED_REQUEST = 'Not allowed request!',
-  OPERATION_FAILED = 'Operation failed!',
+import { registerEnumType } from '@nestjs/graphql';
 
-  /* =========================
-     CRUD
-  ========================== */
-  CREATE_FAILED = 'Create failed!',
-  UPDATE_FAILED = 'Update failed!',
-  REMOVE_FAILED = 'Remove failed!',
-  UPLOAD_FAILED = 'Upload failed!',
+export enum Message {
+	SOMETHING_WENT_WRONG = 'Something went wrong!',
+	NO_DATA_FOUND = 'No data found!',
+	CREATE_FAILED = 'Create failed!',
+	UPDATE_FAILED = 'Update failed!',
+	REMOVE_FAILED = 'Remove failed!',
+	UPLOAD_FAILED = 'Upload failed!',
+	BAD_REQUEST = 'Bad Request',
 
-  /* =========================
-     AUTH / SECURITY
-  ========================== */
-  NOT_AUTHENTICATED = 'You are not authenticated. Please login first!',
-  TOKEN_NOT_EXIST = 'Bearer token is not provided!',
-  TOKEN_EXPIRED = 'Token has expired!',
-  INVALID_TOKEN = 'Invalid token!',
-  ACCESS_DENIED = 'Access denied!',
-  ONLY_SPECIFIC_ROLES_ALLOWED = 'Access allowed only for specific roles!',
-  BLOCKED_USER = 'You have been blocked!',
-
-  /* =========================
-     USER / MEMBER
-  ========================== */
-  NO_MEMBER_NICK = 'No member found with that nickname!',
-  USER_NOT_FOUND = 'User not found!',
-  SELF_SUBSCRIPTION_DENIED = 'Self subscription is denied!',
-  DUPLICATE_EMAIL = 'Email already exists!',
-  DUPLICATE_NICKNAME = 'Nickname already exists!',
-
-  /* =========================
-     AUTH INPUT
-  ========================== */
-  WRONG_PASSWORD = 'Wrong password, try again!',
-  INVALID_CREDENTIALS = 'Invalid credentials!',
-  PASSWORD_TOO_SHORT = 'Password is too short!',
-  PASSWORD_MISMATCH = 'Passwords do not match!',
-
-  /* =========================
-     VALIDATION
-  ========================== */
-  REQUIRED_FIELDS_MISSING = 'Required fields are missing!',
-  INVALID_INPUT = 'Invalid input provided!',
-  INVALID_ID = 'Invalid ID format!',
-
-  /* =========================
-     FILE / UPLOAD
-  ========================== */
-  PROVIDE_ALLOWED_FORMAT = 'Please provide jpg, jpeg, or png images only!',
-  FILE_TOO_LARGE = 'Uploaded file is too large!',
-  FILE_REQUIRED = 'File is required!',
-
-  /* =========================
-     SERVER
-  ========================== */
-  SERVICE_UNAVAILABLE = 'Service temporarily unavailable!',
-  DATABASE_ERROR = 'Database error occurred!',
+	USED_MEMBER_NICK_OR_PHONE = 'Already used member nick or phone!',
+	NO_MEMBER_NICK = 'No member with that member nick!',
+	BLOCKED_USER = 'You have been blocked!',
+	WRONG_PASSWORD = 'Wrong password, try again!',
+	NOT_AUTHENTICATED = 'You are not authenticated, please login first!',
+	TOKEN_NOT_EXIST = 'Bearer Token is not provided!',
+	ONLY_SPECIFIC_ROLES_ALLOWED = 'Allowed only for members with specific role!',
+	NOT_ALLOWED_REQUEST = 'Not Allowed Request!',
+	PROVIDE_ALLOWED_FORMAT = 'Please provide jpg, jpeg or png images!',
+	SELF_SUBSCRIPTION_DENIED = 'Self subscription is denied!',
 }
+
+export enum Direction {
+	ASC = 1,
+	DESC = -1,
+}
+
+registerEnumType(Direction, { name: 'Direction' });

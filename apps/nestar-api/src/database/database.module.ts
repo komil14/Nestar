@@ -18,7 +18,7 @@ export class DatabaseModule {
 		if (this.connection.readyState === 1) {
 			console.log(
 				'Database connected successfully into ' +
-					(process.env.NODE_ENV === 'production' ? 'Production' : 'Development') +
+					(process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'DEVELOPMENT') +
 					' db',
 			);
 		} else {
