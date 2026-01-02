@@ -29,9 +29,6 @@ export class MemberInput {
 
 @InputType()
 export class LoginInput {
-	constructor() {
-		console.log('LoginInput created');
-	}
 	@IsNotEmpty()
 	@Length(3, 12)
 	@Field(() => String)
