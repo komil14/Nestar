@@ -13,7 +13,7 @@ export class MemberResolver {
 		try {
 			console.log('Mutation signup');
 			console.log('input', input);
-			return this.memberService.signup(input);
+			return await this.memberService.signup(input);
 		} catch (err) {
 			console.log('ERROR: signup', err);
 			throw new InternalServerErrorException(err);
@@ -24,9 +24,9 @@ export class MemberResolver {
 	public async login(@Args('input') input: LoginInput): Promise<Member> {
 		try {
 			console.log('Mutation login');
-			return this.memberService.login(input);
+			return await this.memberService.login(input);
 		} catch (err) {
-			console.log('ERROR: signup', err);
+			console.log('ERROR: login', err);
 			throw new InternalServerErrorException(err);
 		}
 	}
@@ -34,12 +34,12 @@ export class MemberResolver {
 	@Mutation(() => String)
 	public async updateMember(): Promise<string> {
 		console.log('Mutation updateMember');
-		return this.memberService.updateMember();
+		return await this.memberService.updateMember();
 	}
 
 	@Query(() => String)
 	public async getMember(): Promise<string> {
 		console.log('Query getMember');
-		return this.memberService.getMember();
+		return await this.memberService.getMember();
 	}
 }
