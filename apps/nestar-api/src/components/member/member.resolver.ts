@@ -6,6 +6,9 @@ import { InternalServerErrorException, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { AuthMember } from '../auth/decorators/authMember.decorator';
 import type { ObjectId } from 'mongoose';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { MemberType } from '../../libs/enums/member.enum';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Resolver()
 export class MemberResolver {
@@ -44,10 +47,25 @@ export class MemberResolver {
 	}
 	@UseGuards(AuthGuard)
 	@Query(() => String)
-	public async checkAuth(@AuthMember('memberNick') memberNick: string): Promise<string> {
+	public async checkAuth(
+		@AuthMember('memberNick') memberNick: string,
+		@AuthMember('_id') memberId: ObjectId,
+		@AuthMember('memberType') memberType: MemberType,
+	): Promise<string> {
 		console.log('Query checkAuth');
 		console.log('Hello', memberNick);
-		return 'Hello ' + memberNick;
+		return `Wassup ${memberNick}, you are ${memberType} and your id ( ${memberId} ) `;
+	}
+	@Roles(MemberType.USER)
+	@UseGuards(RolesGuard)
+	@Query(() => String)
+	public async checkAuthRoles(
+		@AuthMember('memberType')
+		memberType: string,
+	): Promise<string> {
+		console.log('Mutation: checkAuthRoles');
+		console.log(memberType);
+		return `Wassup ${memberType}`;
 	}
 
 	@Query(() => String)
@@ -59,9 +77,12 @@ export class MemberResolver {
 	/*ADMIN*/
 
 	/*Authorization*/
+	@Roles(MemberType.ADMIN)
+	@UseGuards(RolesGuard)
 	@Mutation(() => String)
-	public async getAllMembersByAdmin(): Promise<string> {
+	public async getAllMembersByAdmin(@AuthMember() authMember: Member): Promise<string> {
 		console.log('Mutation getAllMembersByAdmin');
+		console.log('authMember in getAllMembersByAdmin:', authMember.memberType, authMember.memberNick);
 		return await this.memberService.getAllMembersByAdmin();
 	}
 
