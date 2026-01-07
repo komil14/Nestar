@@ -8,6 +8,7 @@ import { Message } from '../../libs/enums/common.enum';
 import { AuthService } from '../auth/auth.service';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { shapeIntoMongoObjectId } from '../../libs/config';
+import { T } from '../../libs/types/common';
 
 @Injectable()
 export class MemberService {
@@ -57,8 +58,18 @@ export class MemberService {
 		return updatedData;
 	}
 
-	public async getMember(): Promise<string> {
-		return 'getMember executed';
+	public async getMember(targetId: ObjectId): Promise<Member> {
+		const search: T = {
+			_id: targetId,
+			memberStatus: {
+				$in: [MemberStatus.ACTIVE, MemberStatus.BLOCK],
+			},
+		};
+		const result = await this.memberModel.findOne(search).exec();
+		if (!result) {
+			throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+		}
+		return result;
 	}
 
 	public async getAllMembersByAdmin(): Promise<string> {
