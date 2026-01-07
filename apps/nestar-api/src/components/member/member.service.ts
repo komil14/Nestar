@@ -45,7 +45,7 @@ export class MemberService {
 	}
 
 	public async updateMember(): Promise<string> {
-		return 'updateMemberexecuted';
+		return 'updateMember executed';
 	}
 
 	public async getMember(): Promise<string> {
@@ -56,7 +56,7 @@ export class MemberService {
 		return 'getAllMembersByAdmin executed';
 	}
 
-	public async updateMemberByAdmin(): Promise<string> {
+	public async updateMembersByAdmin(): Promise<string> {
 		return 'updateMemberByAdmin executed';
 	}
 }
