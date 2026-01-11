@@ -38,7 +38,7 @@ export class MemberUpdate {
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
-	memberAddress?: string;
+	memberAdress?: string;
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
@@ -85,7 +85,7 @@ export class MemberUpdateForAdmin {
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
-	memberAddress?: string;
+	memberAdress?: string;
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
