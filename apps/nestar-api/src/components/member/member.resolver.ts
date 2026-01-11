@@ -134,12 +134,8 @@ export class MemberResolver {
 		const stream = createReadStream();
 
 		const result = await new Promise((resolve, reject) => {
-			stream
-				.pipe(createWriteStream(url))
-				.on('finish', async () => resolve(true))
-				.on('error', () => reject(false));
+			stream.pipe(createWriteStream(url)).on('finish', resolve).on('error', reject);
 		});
-		if (!result) throw new Error(Message.UPLOAD_FAILED);
 
 		return url;
 	}
