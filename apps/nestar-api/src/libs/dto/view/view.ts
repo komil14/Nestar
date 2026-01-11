@@ -4,21 +4,21 @@ import { MemberAuthType, MemberStatus, MemberType } from '../../enums/member.enu
 import { ViewGroup } from '../../enums/view.enum';
 
 import { IsNotEmpty } from 'class-validator';
-import * as mongoose from 'mongoose';
+import type { ObjectId } from 'mongoose';
 
 @ObjectType()
 export class View {
 	@Field(() => String)
-	_id: mongoose.ObjectId;
+	_id: ObjectId;
 
 	@Field(() => ViewGroup)
 	viewGroup: ViewGroup;
 
 	@Field(() => String)
-	viewRefId: mongoose.ObjectId;
+	viewRefId: ObjectId;
 
 	@Field(() => String)
-	memberId: mongoose.ObjectId;
+	memberId: ObjectId;
 
 	@Field(() => Date)
 	createdAt: Date;
